@@ -1,13 +1,15 @@
+import { ReactNode, useEffect, useState } from "react";
 import * as React from "react";
 
 import { Wizard } from "react-use-wizard";
-import Step1 from "./Step1";
+
 import { Box, Typography } from "@mui/material";
-import Step2 from "./Step2";
-import Step3 from "./Step3";
-import Step4 from "./Step4";
-import Timer from "./Timer";
-import { ReactNode, useEffect, useState } from "react";
+
+import Question1 from "./components/Question1";
+import Question2 from "./components/Question2";
+import Question3 from "./components/Question3";
+import Question4 from "./components/Question4";
+import Timer from "./components/Timer";
 
 interface WizardWithCountProps {
   children: ReactNode;
@@ -85,10 +87,10 @@ const App = () => {
         <Timer />
       </Box>
       <WizardWithCount currentStep={currentStep}>
-        <Step1 setCurrentStep={setCurrentStep} />
-        <Step2 setCurrentStep={setCurrentStep} />
-        <Step3 setCurrentStep={setCurrentStep} />
-        <Step4 setCurrentStep={setCurrentStep} />
+        <Question1 setCurrentStep={setCurrentStep} />
+        <Question2 setCurrentStep={setCurrentStep} />
+        <Question3 setCurrentStep={setCurrentStep} />
+        <Question4 setCurrentStep={setCurrentStep} />
       </WizardWithCount>
     </Box>
   );

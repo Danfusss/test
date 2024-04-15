@@ -23,9 +23,6 @@ const CountdownTimer = () => {
 
   useEffect(() => {
     localStorage.setItem("timeLeft", timeLeft.toString());
-  }, [timeLeft]);
-
-  useEffect(() => {
     if (timeLeft > 0) {
       const timerId = setInterval(() => setTimeLeft(timeLeft - 1), 1000);
       return () => clearInterval(timerId);
@@ -46,7 +43,6 @@ const CountdownTimer = () => {
       }}
     >
       {m}:{s < 10 ? "0" : ""}
-      {s}
     </Typography>
   );
 };

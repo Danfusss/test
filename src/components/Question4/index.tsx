@@ -3,31 +3,32 @@ import { ChangeEvent, FC, useEffect, useState } from "react";
 import { Stack, TextField, Typography } from "@mui/material";
 
 import ButtonGroup from "../ButtonGroup";
-import { StepProps } from "../types";
+import { StepProps } from "../../types";
 
-const Step3: FC<StepProps> = ({ setCurrentStep }) => {
-  const [value, setValue] = useState<string | null>(
-    localStorage.getItem("step3")
+const Question4: FC<StepProps> = ({ setCurrentStep }) => {
+  const [value, setValue] = useState<string>(
+    localStorage.getItem("step4") || ""
   );
 
   useEffect(() => {
-    localStorage.setItem("step3", value || "");
+    localStorage.setItem("step4", value || "");
   }, [value]);
 
-  const handleChange = (
-    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
   };
   return (
     <Stack>
       <Typography variant="h5" sx={{ textAlign: "left" }}>
-        {"Какой тег используется для создания ссылки в HTML?"}
+        {
+          "Объясните, как работает механизм наследования в JavaScript, сравнивая классовое и прототипное наследование."
+        }
       </Typography>
       <TextField
-        onChange={(event) => {
-          handleChange(event);
+        onChange={() => {
+          handleChange;
         }}
+        value={value}
         id="standard-multiline-flexible"
         label="Введите ваш вариант ответа"
         multiline
@@ -39,4 +40,4 @@ const Step3: FC<StepProps> = ({ setCurrentStep }) => {
   );
 };
 
-export default Step3;
+export default Question4;

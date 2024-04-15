@@ -10,11 +10,11 @@ import {
 } from "@mui/material";
 
 import ButtonGroup from "../ButtonGroup";
-import { StepProps } from "../types";
+import { StepProps } from "../../types";
 
-const Step1: FC<StepProps> = ({ setCurrentStep }) => {
-  const [value, setValue] = useState<string | null>(
-    localStorage.getItem("step1")
+const Question1: FC<StepProps> = ({ setCurrentStep }) => {
+  const [value, setValue] = useState<string>(
+    localStorage.getItem("step1") || ""
   );
 
   useEffect(() => {
@@ -60,4 +60,4 @@ const Step1: FC<StepProps> = ({ setCurrentStep }) => {
   );
 };
 
-export default Step1;
+export default Question1;

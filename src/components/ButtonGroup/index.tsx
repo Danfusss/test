@@ -4,7 +4,7 @@ import { useWizard } from "react-use-wizard";
 
 import { Box, Button } from "@mui/material";
 
-import { StepProps } from "../types";
+import { StepProps } from "../../types";
 
 const ButtonGroup: FC<StepProps> = ({ setCurrentStep }) => {
   const { previousStep, nextStep } = useWizard();
