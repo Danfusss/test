@@ -1,10 +1,9 @@
-import { ChangeEvent, FC, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 
 import {
+  Checkbox,
   FormControl,
   FormControlLabel,
-  Radio,
-  RadioGroup,
   Stack,
   Typography,
 } from "@mui/material";
@@ -13,16 +12,26 @@ import ButtonGroup from "../ButtonGroup";
 import { StepProps } from "../../types";
 
 const Question2: FC<StepProps> = ({ setCurrentStep }) => {
-  const [value, setValue] = useState<string>(
-    localStorage.getItem("step2") || ""
+  const [value, setValue] = useState<string[]>(
+    JSON.parse(localStorage.getItem("step2") || "[]")
   );
-
   useEffect(() => {
-    localStorage.setItem("step2", value || "");
+    console.log("Value updated:", value);
+  }, [value]);
+  useEffect(() => {
+    console.log(value);
+    localStorage.setItem("step2", JSON.stringify(value) || "");
   }, [value]);
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.value);
+  const handleChange = (event: React.SyntheticEvent, checked: boolean) => {
+    const newValue = (event.target as HTMLInputElement).value;
+    setValue((prevValue) => {
+      if (checked) {
+        return [...prevValue, newValue];
+      } else {
+        return prevValue.filter((val) => val !== newValue);
+      }
+    });
   };
   return (
     <Stack>
@@ -32,21 +41,30 @@ const Question2: FC<StepProps> = ({ setCurrentStep }) => {
         }
       </Typography>
       <FormControl>
-        <RadioGroup
-          aria-labelledby="demo-controlled-radio-buttons-group"
-          name="controlled-radio-buttons-group"
-          value={value}
-          onChange={handleChange}
-        >
-          <FormControlLabel value="CSS" control={<Radio />} label="CSS" />
-          <FormControlLabel
-            value="JavaScript"
-            control={<Radio />}
-            label="JavaScript"
-          />
-          <FormControlLabel value="HTML" control={<Radio />} label="HTML" />
-          <FormControlLabel value="PHP" control={<Radio />} label="PHP" />
-        </RadioGroup>
+        <FormControlLabel
+          value="CSS"
+          control={<Checkbox />}
+          label="CSS"
+          onChange={(event, checked) => handleChange(event, checked)}
+        />
+        <FormControlLabel
+          value="JavaScript"
+          control={<Checkbox />}
+          label="JavaScript"
+          onChange={(event, checked) => handleChange(event, checked)}
+        />
+        <FormControlLabel
+          value="HTML"
+          control={<Checkbox />}
+          label="HTML"
+          onChange={(event, checked) => handleChange(event, checked)}
+        />
+        <FormControlLabel
+          value="PHP"
+          control={<Checkbox />}
+          label="PHP"
+          onChange={(event, checked) => handleChange(event, checked)}
+        />
       </FormControl>
       <ButtonGroup setCurrentStep={setCurrentStep} />
     </Stack>
